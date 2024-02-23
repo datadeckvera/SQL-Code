@@ -1,2 +1,2 @@
-# datadeckvera
-My Portfolio Projects
+# Portolio Projects
+SQL and R codes
