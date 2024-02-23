@@ -1,2 +1,2 @@
-# Portolio Projects
+# Portfolio Projects
 SQL and R codes
