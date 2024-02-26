@@ -1,2 +1,2 @@
-# Portfolio Projects
-The hub for codes I use in my projects. Check out my [Portfolio Website](https://www.veramaranzu.com) to see the full projects.
+# SQL Portfolio Projects
+The hub for the SQL codes I use in my projects. Check out my [Portfolio Website](https://www.veramaranzu.com) to see the full projects.
