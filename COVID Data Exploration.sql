@@ -86,7 +86,7 @@ WHERE continent IS NOT NULL
 ORDER BY 1,2
 
 -- Total Cases vs Population:
--- Shows **daily** percentage of population infected with  COVID in a country. Query example below is for countries with “states” in their name (United States)
+-- Shows **daily** percentage of population infected with COVID in a country. Query example below is for countries with “states” in their name (United States)
 
 SELECT location, date, total_cases, population, (total_cases/population) * 100 AS PercentPopInfected
 FROM PortfolioProject..CovidDeaths
