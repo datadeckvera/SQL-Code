@@ -108,7 +108,7 @@ SELECT location, population, MAX(total_cases) AS HighestInfectionCount, MAX((tot
 FROM PortfolioProject..CovidDeaths
 WHERE continent IS NOT NULL
 GROUP BY location, population
-ORDER BY PercentPopulationInfected DESC
+ORDER BY PercentPopInfected DESC
 
 -- Countries with Highest Death Count per Population
 
