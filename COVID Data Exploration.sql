@@ -82,7 +82,7 @@ ORDER BY 1
 SELECT Location, date, total_cases, total_deaths, (total_deaths/total_cases) * 100 AS DeathPercentage
 FROM PortfolioProject..CovidDeaths
 WHERE location LIKE '%States%'
-WHERE continent IS NOT NULL
+AND continent IS NOT NULL
 ORDER BY 1,2
 
 -- Total Cases vs Population:
@@ -91,7 +91,7 @@ ORDER BY 1,2
 SELECT location, date, total_cases, population, (total_cases/population) * 100 AS PercentPopInfected
 FROM PortfolioProject..CovidDeaths
 WHERE location LIKE '%States%'
-WHERE continent IS NOT NULL
+AND continent IS NOT NULL
 ORDER BY 1,2
 
 -- To see daily percentage of population infected for **all** countries, comment out the WHERE statement that contains the wildcard:
