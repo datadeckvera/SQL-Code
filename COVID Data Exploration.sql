@@ -44,6 +44,31 @@ WHERE continent IS NOT NULL
 GROUP BY location, population
 ORDER BY 1
 
+-- Total Covid Cases vs Deaths Pre and Post Lockdown
+-- Using CTE to perform the calculation and return running totals of cases and deaths by the lockdown date for each country
+--- recall that you must always run the CTE along with any query that you write which pulls data FROM the CTE table (DeathvLockdown)
+---- to return running totals of cases and deaths AFTER the lockdown date, change the <= in the CTE to >
+
+WITH DeathvLockdown (location, population, date, tot_cases, tot_deaths)
+AS (
+SELECT dea.location, dea.population, dea.date, MAX(total_cases) AS tot_cases, MAX(CAST(total_deaths AS int)) AS tot_deaths
+FROM PortfolioProject..CovidDeaths AS dea
+JOIN PortfolioProject..CovidLockdowns AS loc
+ON dea.location = loc.location
+WHERE dea.continent IS NOT NULL AND dea.date <= loc.date
+GROUP BY dea.location, dea.population, dea.date
+)
+
+SELECT *
+FROM DeathvLockdown
+
+-- you can save the output as a View for further queries. For example, on a View named CasesPreLockdown:
+-- group by country and show the total cases and deaths (not running totals) for each country by lockdown date 
+
+SELECT location, population, CAST(MAX(date) AS DATE) AS LockdownDate, MAX(tot_cases) AS CasesPreLockdown, MAX(tot_deaths) AS DeathsPreLockdown
+  FROM CasesPreLockdown
+  GROUP BY location, population
+  ORDER BY 1  
 -- To look at DeathPercentage for a particular country, use a wildcard in the WHERE statement. For example to filter for the United **States**:
 
 SELECT Location, date, total_cases, total_deaths, (total_deaths/total_cases) * 100 AS DeathPercentage
@@ -53,7 +78,7 @@ WHERE continent IS NOT NULL
 ORDER BY 1,2
 
 -- Total Cases vs Population:
--- Shows **daily** percentage of population infected with  COVID in a country. Query example below is for countries with “states” in their name (United States)
+-- Shows **daily** percentage of population infected with  COVID in a country. Query example below is for countries with â€œstatesâ€ in their name (United States)
 
 SELECT location, date, total_cases, population, (total_cases/population) * 100 AS PercentPopInfected
 FROM PortfolioProject..CovidDeaths
