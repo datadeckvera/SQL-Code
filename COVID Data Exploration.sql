@@ -65,9 +65,17 @@ FROM DeathvLockdown
 -- group by country and show the total cases and deaths (not running totals) for each country by lockdown date 
 
 SELECT location, population, CAST(MAX(date) AS DATE) AS LockdownDate, MAX(tot_cases) AS CasesPreLockdown, MAX(tot_deaths) AS DeathsPreLockdown
-  FROM CasesPreLockdown
-  GROUP BY location, population
-  ORDER BY 1  
+FROM CasesPreLockdown
+GROUP BY location, population
+ORDER BY 1  
+
+-- show what countries initiated lockdowns before any cases or deaths
+
+SELECT location, population, CAST(MAX(date) AS DATE) AS LockdownDate, MAX(tot_cases) AS CasesPreLockdown, MAX(tot_deaths) AS DeathsPreLockdown
+FROM CasesPreLockdown
+GROUP BY location, population
+HAVING MAX(tot_cases) IS NULL AND MAX(tot_deaths) IS NULL
+ORDER BY 1
 
 -- To look at DeathPercentage for a particular country, use a wildcard in the WHERE statement. For example to filter for the United **States**:
 
