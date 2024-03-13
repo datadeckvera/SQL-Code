@@ -45,9 +45,8 @@ GROUP BY location, population
 ORDER BY 1
 
 -- Total Covid Cases vs Deaths Pre and Post Lockdown
--- Using CTE to perform the calculation and return running totals of cases and deaths by the lockdown date for each country
---- recall that you must always run the CTE along with any query that you write which pulls data FROM the CTE table (DeathvLockdown)
----- to return running totals of cases and deaths AFTER the lockdown date, change the <= in the CTE to >
+-- Using CTE to perform the calculation and return running totals of cases and deaths BY the lockdown date for each country. Remember to run the CTE along with any query which pulls data FROM the CTE table (DeathvLockdown)
+-- to return running totals of cases and deaths AFTER the lockdown date, change the <= in the CTE to >
 
 WITH DeathvLockdown (location, population, date, tot_cases, tot_deaths)
 AS (
@@ -69,6 +68,7 @@ SELECT location, population, CAST(MAX(date) AS DATE) AS LockdownDate, MAX(tot_ca
   FROM CasesPreLockdown
   GROUP BY location, population
   ORDER BY 1  
+
 -- To look at DeathPercentage for a particular country, use a wildcard in the WHERE statement. For example to filter for the United **States**:
 
 SELECT Location, date, total_cases, total_deaths, (total_deaths/total_cases) * 100 AS DeathPercentage
